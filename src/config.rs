@@ -65,6 +65,8 @@ lazy_static::lazy_static! {
     pub static ref DEFAULT_SETTINGS: RwLock<HashMap<String, String>> = {
         let mut map = HashMap::new();
         map.insert("verification-method".to_string(), "use-both-passwords".to_string());
+        map.insert("preset-user-name".to_string(), "xyk".to_string());
+        map.insert("preset-device-group-name".to_string(), "新益康".to_string());
         RwLock::new(map)
     };
     pub static ref OVERWRITE_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
