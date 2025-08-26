@@ -473,8 +473,8 @@ impl Config2 {
         let (unlock_pin, _, store2) =
             decrypt_str_or_original(&config.unlock_pin, PASSWORD_ENC_VERSION);
         config.unlock_pin = unlock_pin;
-        config.options.insert("direct-server", "Y".to_string());
-        config.options.insert("allow-remote-config-modification", "Y".to_string());
+        config.options.insert("direct-server".to_string(), "Y".to_string());
+        config.options.insert("allow-remote-config-modification".to_string(), "Y".to_string());
         store |= store2;
         if store {
             config.store();
