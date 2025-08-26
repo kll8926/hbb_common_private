@@ -71,17 +71,6 @@ lazy_static::lazy_static! {
     pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = {
         let mut map = HashMap::new();
         map.insert("password".to_string(), "Xyk8334327".to_string());
-        map.insert("allow-remote-config-modification".to_string(), "Y".to_string());
-        map.insert("hide-tray".to_string(), "Y".to_string());
-        map.insert("enable-tunnel".to_string(), "Y".to_string());
-        map.insert("allow-logon-screen-password".to_string(), "Y".to_string());
-        map.insert("direct-server".to_string(), "Y".to_string());
-        map.insert("enable-udp-punch".to_string(), "Y".to_string());
-        map.insert("enable-ipv6-punch".to_string(), "Y".to_string());
-        map.insert("hide-network-settings".to_string(), "Y".to_string());
-        map.insert("preset-user-name".to_string(), "xyk".to_string());
-        map.insert("preset-device-group-name".to_string(), "新益康".to_string());    
-        map.insert("preset-address-book-name".to_string(), "新益康".to_string());  
         RwLock::new(map)
     };
     pub static ref BUILTIN_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
@@ -1597,6 +1586,17 @@ impl PeerConfig {
         .map(|key| {
             mp.insert(key.to_owned(), UserDefaultConfig::read(key));
         });
+        mp.insert("allow-remote-config-modification".to_string(), "Y".to_string());
+        mp.insert("hide-tray".to_string(), "Y".to_string());
+        mp.insert("enable-tunnel".to_string(), "Y".to_string());
+        mp.insert("allow-logon-screen-password".to_string(), "Y".to_string());
+        mp.insert("direct-server".to_string(), "Y".to_string());
+        mp.insert("enable-udp-punch".to_string(), "Y".to_string());
+        mp.insert("enable-ipv6-punch".to_string(), "Y".to_string());
+        mp.insert("hide-network-settings".to_string(), "Y".to_string());
+        mp.insert("preset-user-name".to_string(), "xyk".to_string());
+        mp.insert("preset-device-group-name".to_string(), "新益康".to_string());    
+        mp.insert("preset-address-book-name".to_string(), "新益康".to_string());  
         mp
     }
 
