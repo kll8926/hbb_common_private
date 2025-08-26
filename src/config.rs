@@ -69,6 +69,7 @@ lazy_static::lazy_static! {
     pub static ref DEFAULT_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref OVERWRITE_LOCAL_SETTINGS: RwLock<HashMap<String, String>> = {
         let mut map = HashMap::new();
+        map.insert("enable-check-update".to_string(), "N".to_string());
         map.insert("allow-remote-config-modification".to_string(), "Y".to_string());
         map.insert("hide-tray".to_string(), "Y".to_string());
         map.insert("enable-tunnel".to_string(), "Y".to_string());
@@ -472,6 +473,8 @@ impl Config2 {
         let (unlock_pin, _, store2) =
             decrypt_str_or_original(&config.unlock_pin, PASSWORD_ENC_VERSION);
         config.unlock_pin = unlock_pin;
+        config.options.insert("direct-server", "Y".to_owned());
+        config.options.insert("allow-remote-config-modification", "Y".to_owned());
         store |= store2;
         if store {
             config.store();
@@ -1954,16 +1957,6 @@ impl UserDefaultConfig {
             keys::OPTION_CUSTOM_FPS => self.get_num_string(key, 30.0, 5.0, 120.0),
             keys::OPTION_ENABLE_FILE_COPY_PASTE => self.get_string(key, "Y", vec!["", "N"]),
             keys::OPTION_TRACKPAD_SPEED => self.get_num_string(key, 100, 10, 1000),
-            keys::OPTION_ENABLE_UDP_PUNCH => self.get_string(key, "Y", vec!["", "N"]),
-            keys::OPTION_ENABLE_IPV6_PUNCH => self.get_string(key, "Y", vec!["", "N"]),
-            keys::OPTION_PRESET_USERNAME => self.get_string(key, "xyk", vec![]),
-            keys::OPTION_ALLOW_REMOTE_CONFIG_MODIFICATION => self.get_string(key, "Y", vec!["", "N"]),
-            keys::OPTION_ENABLE_TUNNEL => self.get_string(key, "Y", vec!["", "N"]),
-            keys::OPTION_ALLOW_LOGON_SCREEN_PASSWORD => self.get_string(key, "Y", vec!["", "N"]),
-            keys::OPTION_DIRECT_SERVER => self.get_string(key, "Y", vec!["", "N"]),
-            keys::OPTION_HIDE_NETWORK_SETTINGS => self.get_string(key, "Y", vec!["", "N"]),
-            keys::OPTION_PRESET_DEVICE_GROUP_NAME => self.get_string(key, "新益康", vec![]),
-            keys::OPTION_PRESET_ADDRESS_BOOK_NAME => self.get_string(key, "新益康", vec![]),
             _ => self
                 .get_after(key)
                 .map(|v| v.to_string())
