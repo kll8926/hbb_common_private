@@ -1586,17 +1586,6 @@ impl PeerConfig {
         .map(|key| {
             mp.insert(key.to_owned(), UserDefaultConfig::read(key));
         });
-        mp.insert("allow-remote-config-modification".to_string(), "Y".to_string());
-        mp.insert("hide-tray".to_string(), "Y".to_string());
-        mp.insert("enable-tunnel".to_string(), "Y".to_string());
-        mp.insert("allow-logon-screen-password".to_string(), "Y".to_string());
-        mp.insert("direct-server".to_string(), "Y".to_string());
-        mp.insert("enable-udp-punch".to_string(), "Y".to_string());
-        mp.insert("enable-ipv6-punch".to_string(), "Y".to_string());
-        mp.insert("hide-network-settings".to_string(), "Y".to_string());
-        mp.insert("preset-user-name".to_string(), "xyk".to_string());
-        mp.insert("preset-device-group-name".to_string(), "新益康".to_string());    
-        mp.insert("preset-address-book-name".to_string(), "新益康".to_string());  
         mp
     }
 
@@ -1951,6 +1940,16 @@ impl UserDefaultConfig {
             keys::OPTION_CUSTOM_FPS => self.get_num_string(key, 30.0, 5.0, 120.0),
             keys::OPTION_ENABLE_FILE_COPY_PASTE => self.get_string(key, "Y", vec!["", "N"]),
             keys::OPTION_TRACKPAD_SPEED => self.get_num_string(key, 100, 10, 1000),
+            keys::OPTION_ENABLE_UDP_PUNCH => self.get_string(key, "Y", vec!["", "N"]),
+            keys::OPTION_ENABLE_IPV6_PUNCH => self.get_string(key, "Y", vec!["", "N"]),
+            keys::OPTION_PRESET_USERNAME => self.get_string(key, "xyk", vec![]),
+            keys::OPTION_ALLOW_REMOTE_CONFIG_MODIFICATION => self.get_string(key, "Y", vec!["", "N"]),
+            keys::OPTION_ENABLE_TUNNEL => self.get_string(key, "Y", vec!["", "N"]),
+            keys::OPTION_ALLOW_LOGON_SCREEN_PASSWORD => self.get_string(key, "Y", vec!["", "N"]),
+            keys::OPTION_DIRECT_SERVER => self.get_string(key, "Y", vec!["", "N"]),
+            keys::OPTION_HIDE_NETWORK_SETTINGS => self.get_string(key, "Y", vec!["", "N"]),
+            keys::OPTION_PRESET_DEVICE_GROUP_NAME => self.get_string(key, "新益康", vec![]),
+            keys::OPTION_PRESET_ADDRESS_BOOK_NAME => self.get_string(key, "新益康", vec![]),
             _ => self
                 .get_after(key)
                 .map(|v| v.to_string())
